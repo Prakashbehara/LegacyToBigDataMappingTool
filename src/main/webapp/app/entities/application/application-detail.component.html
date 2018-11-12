@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="application">
+            <h2><span>Application</span> {{application.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Application Code</span></dt>
+                <dd>
+                    <span>{{application.applicationCode}}</span>
+                </dd>
+                <dt><span>Domain</span></dt>
+                <dd>
+                    <span>{{application.domain}}</span>
+                </dd>
+                <dt><span>Project Type</span></dt>
+                <dd>
+                    <span>{{application.projectType}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{application.description}}</span>
+                </dd>
+                <dt><span>Owner</span></dt>
+                <dd>
+                    <span>{{application.owner}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/application', application.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

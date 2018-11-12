@@ -1,0 +1,80 @@
+{
+    "name": "SourceFeed",
+    "fields": [
+        {
+            "fieldName": "feedCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fileNamePattern",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "headerCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "trailerCount",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "trailerRecordStartsWith",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "feedFrequency",
+            "fieldType": "Frequency",
+            "fieldValues": "DAILY,WEEKLY,MONTHEND,BIWEEKLY,ADHOC,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sla",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "application",
+            "otherEntityName": "application",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "sourceDatabase",
+            "otherEntityName": "sourceDatabase",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sourceFeed"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sourceFeedMapping",
+            "otherEntityName": "sourceFeedMapping",
+            "otherEntityRelationshipName": "sourceFeed"
+        }
+    ],
+    "changelogDate": "20181108033052",
+    "entityTableName": "source_feed",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

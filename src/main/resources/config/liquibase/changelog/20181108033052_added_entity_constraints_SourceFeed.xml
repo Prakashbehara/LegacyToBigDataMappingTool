@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity SourceFeed.
+    -->
+    <changeSet id="20181108033052-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="source_feed"
+                                 constraintName="fk_source_feed_application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"/>
+
+        <addForeignKeyConstraint baseColumnNames="source_database_id"
+                                 baseTableName="source_feed"
+                                 constraintName="fk_source_feed_source_database_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="source_database"/>
+
+    </changeSet>
+</databaseChangeLog>

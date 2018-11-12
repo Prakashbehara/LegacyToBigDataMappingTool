@@ -1,0 +1,140 @@
+entity Application {
+    applicationCode String required minlength(3) maxlength(6)
+    domain Domain required
+    projectType ProjectType required
+    description String required maxlength(50) pattern(/[a-z]+/)
+    owner String
+}
+
+enum ProjectType {
+    CONVERSION, NEW , DO_NOT_KNOW
+}
+enum Domain {
+    POLICY, FINANCE, INGENIUM ,INVESTMENT, DO_NOT_KNOW
+}
+
+enum Frequency {
+    DAILY, WEEKLY, MONTHEND , BIWEEKLY , ADHOC , DO_NOT_KNOW
+}
+
+enum FieldDataType {
+    STRING, NUMBER, DECIMAL , DATE , DO_NOT_KNOW
+}
+
+enum DataCategory {
+    UDG, EDG , DO_NOT_KNOW
+}
+
+enum DataAssetType {
+    CONTROL_REPORTS, EXCEPTION_REPORTS , BO_REPORT , TABLEAU_REPORT,
+    SYSTEM_FEED , ADHOC , SAS , PYTHON, DO_NOT_KNOW
+}
+ 
+enum TableType {
+    FEED_TABLE, REF_DATA
+} 
+entity SourceFeed{
+    feedCode String required
+    fileNamePattern String required
+    headerCount Integer required
+    trailerCount Integer required
+    trailerRecordStartsWith String
+    feedFrequency  Frequency required
+    sla String
+}
+
+entity SourceFeedMapping{
+    fieldName String required
+    fieldOrderNumber Integer required
+    fieldDataType FieldDataType required
+    fieldScale Integer 
+    fieldPrecision Integer    
+    cde Boolean required
+    pii Boolean required
+    dataCategory DataCategory required
+    dataQualityRule String
+}
+
+
+entity SourceDatabase{
+   tableName String required
+   schema String
+   tableType TableType    
+   
+}
+
+entity SourceDatabaseMapping{   
+    dbColumnName String required
+    dbDataType FieldDataType required
+    dbFieldScale Integer 
+    dbFieldPrecision Integer 
+}
+
+entity DataModel{
+   entitiyName String 
+   domain Domain
+}
+entity DataModelMapping{
+    fieldName String required
+    fieldDataType FieldDataType required
+    fieldOrderNumber Integer required
+    fieldScale Integer 
+    fieldPrecision Integer
+    pii Boolean required
+    dataCategory DataCategory required
+}
+
+entity DataAsset {
+     name String required
+     assetFileName String required
+     type DataAssetType required
+     frequency Frequency required
+     storedProcedureName String 
+     queryLogic TextBlob
+     remarks String
+     edhAssetName String 
+     emailDistribution String
+}
+
+relationship OneToMany {
+	Application{sourceFeed} to SourceFeed    
+    SourceFeed{sourceFeedMapping} to  SourceFeedMapping
+    DataModel{dataModelMapping} to  DataModelMapping
+    Application{dataAsset} to DataAsset
+    SourceDatabase{sourceDatabaseMapping} to SourceDatabaseMapping    
+    Application{sourceDatabase} to SourceDatabase
+}  
+relationship ManyToMany {
+    SourceFeedMapping{dataAsset} to DataAsset 
+    DataAsset{sourceFeed} to SourceFeed
+    DataAsset{sourceDatabase} to SourceDatabase
+}
+
+relationship OneToOne {
+  SourceFeedMapping{dataModelMapping} to DataModelMapping
+  SourceFeedMapping{sourceDatabaseMapping} to SourceDatabaseMapping
+  SourceFeed{sourceDatabase} to SourceDatabase
+}
+
+filter Application
+filter SourceFeed
+filter SourceFeedMapping
+filter SourceDatabase
+filter SourceDatabaseMapping
+filter DataModel
+filter DataModelMapping
+filter DataAsset
+
+
+// Set pagination options
+paginate SourceFeedMapping with infinite-scroll
+paginate Application with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

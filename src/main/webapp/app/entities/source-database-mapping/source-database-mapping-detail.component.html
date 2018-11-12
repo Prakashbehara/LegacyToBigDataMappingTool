@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sourceDatabaseMapping">
+            <h2><span>Source Database Mapping</span> {{sourceDatabaseMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Db Column Name</span></dt>
+                <dd>
+                    <span>{{sourceDatabaseMapping.dbColumnName}}</span>
+                </dd>
+                <dt><span>Db Data Type</span></dt>
+                <dd>
+                    <span>{{sourceDatabaseMapping.dbDataType}}</span>
+                </dd>
+                <dt><span>Db Field Scale</span></dt>
+                <dd>
+                    <span>{{sourceDatabaseMapping.dbFieldScale}}</span>
+                </dd>
+                <dt><span>Db Field Precision</span></dt>
+                <dd>
+                    <span>{{sourceDatabaseMapping.dbFieldPrecision}}</span>
+                </dd>
+                <dt><span>Source Database</span></dt>
+                <dd>
+                    <div *ngIf="sourceDatabaseMapping.sourceDatabase">
+                        <a [routerLink]="['/source-database', sourceDatabaseMapping.sourceDatabase?.id, 'view']">{{sourceDatabaseMapping.sourceDatabase?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/source-database-mapping', sourceDatabaseMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

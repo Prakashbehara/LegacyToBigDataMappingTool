@@ -1,0 +1,35 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.myapp"
+    },
+    "jhipsterVersion": "5.4.1",
+    "applicationType": "monolith",
+    "baseName": "MyApp",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ODZiZTJjNDJjZDI1NTQ4MDgxNWQ1MTkyZmZlYTdlZDczOGMxM2QwM2JkNTU4OGI3MmEzNGFiNzBhN2ZkNTg4NzY5N2Q3N2M5MGJhMjg3OWU5YjA3OWE0OTQ4NmE3NmM4N2Y5YmE0Yzg5N2ZlMGZjMGM0MDI1MzkwYzA5N2EzYjg=",
+    "clientFramework": "angularX",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": false,
+    "herokuAppName": "my-app",
+    "herokuDeployType": "jar"
+  }
+}

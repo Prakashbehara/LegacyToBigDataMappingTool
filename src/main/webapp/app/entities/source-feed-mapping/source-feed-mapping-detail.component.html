@@ -1,0 +1,83 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sourceFeedMapping">
+            <h2><span>Source Feed Mapping</span> {{sourceFeedMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Field Name</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.fieldName}}</span>
+                </dd>
+                <dt><span>Field Order Number</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.fieldOrderNumber}}</span>
+                </dd>
+                <dt><span>Field Data Type</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.fieldDataType}}</span>
+                </dd>
+                <dt><span>Field Scale</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.fieldScale}}</span>
+                </dd>
+                <dt><span>Field Precision</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.fieldPrecision}}</span>
+                </dd>
+                <dt><span>Cde</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.cde}}</span>
+                </dd>
+                <dt><span>Pii</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.pii}}</span>
+                </dd>
+                <dt><span>Data Category</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.dataCategory}}</span>
+                </dd>
+                <dt><span>Data Quality Rule</span></dt>
+                <dd>
+                    <span>{{sourceFeedMapping.dataQualityRule}}</span>
+                </dd>
+                <dt><span>Source Feed</span></dt>
+                <dd>
+                    <div *ngIf="sourceFeedMapping.sourceFeed">
+                        <a [routerLink]="['/source-feed', sourceFeedMapping.sourceFeed?.id, 'view']">{{sourceFeedMapping.sourceFeed?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Data Model Mapping</span></dt>
+                <dd>
+                    <div *ngIf="sourceFeedMapping.dataModelMapping">
+                        <a [routerLink]="['/data-model-mapping', sourceFeedMapping.dataModelMapping?.id, 'view']">{{sourceFeedMapping.dataModelMapping?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Source Database Mapping</span></dt>
+                <dd>
+                    <div *ngIf="sourceFeedMapping.sourceDatabaseMapping">
+                        <a [routerLink]="['/source-database-mapping', sourceFeedMapping.sourceDatabaseMapping?.id, 'view']">{{sourceFeedMapping.sourceDatabaseMapping?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Data Asset</span></dt>
+                <dd>
+                    <span *ngFor="let dataAsset of sourceFeedMapping.dataAssets; let last = last">
+                        <a [routerLink]="['/data-asset', dataAsset?.id, 'view' ]">{{dataAsset.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/source-feed-mapping', sourceFeedMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-data-model-mapping-heading">Create or edit a Data Model Mapping</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!dataModelMapping.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="dataModelMapping.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldName">Field Name</label>
+                    <input type="text" class="form-control" name="fieldName" id="field_fieldName"
+                        [(ngModel)]="dataModelMapping.fieldName" required/>
+                    <div [hidden]="!(editForm.controls.fieldName?.dirty && editForm.controls.fieldName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fieldName?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldDataType">Field Data Type</label>
+                    <select class="form-control" name="fieldDataType" [(ngModel)]="dataModelMapping.fieldDataType" id="field_fieldDataType"  required>
+                        <option value="STRING">STRING</option>
+                        <option value="NUMBER">NUMBER</option>
+                        <option value="DECIMAL">DECIMAL</option>
+                        <option value="DATE">DATE</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.fieldDataType?.dirty && editForm.controls.fieldDataType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fieldDataType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldOrderNumber">Field Order Number</label>
+                    <input type="number" class="form-control" name="fieldOrderNumber" id="field_fieldOrderNumber"
+                        [(ngModel)]="dataModelMapping.fieldOrderNumber" required/>
+                    <div [hidden]="!(editForm.controls.fieldOrderNumber?.dirty && editForm.controls.fieldOrderNumber?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fieldOrderNumber?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.fieldOrderNumber?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldScale">Field Scale</label>
+                    <input type="number" class="form-control" name="fieldScale" id="field_fieldScale"
+                        [(ngModel)]="dataModelMapping.fieldScale" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldPrecision">Field Precision</label>
+                    <input type="number" class="form-control" name="fieldPrecision" id="field_fieldPrecision"
+                        [(ngModel)]="dataModelMapping.fieldPrecision" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pii">Pii</label>
+                    <input type="checkbox" class="form-control" name="pii" id="field_pii"
+                        [(ngModel)]="dataModelMapping.pii" />
+                    <div [hidden]="!(editForm.controls.pii?.dirty && editForm.controls.pii?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pii?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataCategory">Data Category</label>
+                    <select class="form-control" name="dataCategory" [(ngModel)]="dataModelMapping.dataCategory" id="field_dataCategory"  required>
+                        <option value="UDG">UDG</option>
+                        <option value="EDG">EDG</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.dataCategory?.dirty && editForm.controls.dataCategory?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dataCategory?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataModel">Data Model</label>
+                    <select class="form-control" id="field_dataModel" name="dataModel" [(ngModel)]="dataModelMapping.dataModel" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dataModelOption.id === dataModelMapping.dataModel?.id ? dataModelMapping.dataModel : dataModelOption" *ngFor="let dataModelOption of datamodels; trackBy: trackDataModelById">{{dataModelOption.entitiyName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

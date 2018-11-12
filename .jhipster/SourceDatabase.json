@@ -1,0 +1,44 @@
+{
+    "name": "SourceDatabase",
+    "fields": [
+        {
+            "fieldName": "tableName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "schema",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tableType",
+            "fieldType": "TableType",
+            "fieldValues": "FEED_TABLE,REF_DATA"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "application",
+            "otherEntityName": "application",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sourceDatabaseMapping",
+            "otherEntityName": "sourceDatabaseMapping",
+            "otherEntityRelationshipName": "sourceDatabase"
+        }
+    ],
+    "changelogDate": "20181108102427",
+    "entityTableName": "source_database",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

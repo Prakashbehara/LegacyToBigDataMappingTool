@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dataModelMapping">
+            <h2><span>Data Model Mapping</span> {{dataModelMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Field Name</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.fieldName}}</span>
+                </dd>
+                <dt><span>Field Data Type</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.fieldDataType}}</span>
+                </dd>
+                <dt><span>Field Order Number</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.fieldOrderNumber}}</span>
+                </dd>
+                <dt><span>Field Scale</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.fieldScale}}</span>
+                </dd>
+                <dt><span>Field Precision</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.fieldPrecision}}</span>
+                </dd>
+                <dt><span>Pii</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.pii}}</span>
+                </dd>
+                <dt><span>Data Category</span></dt>
+                <dd>
+                    <span>{{dataModelMapping.dataCategory}}</span>
+                </dd>
+                <dt><span>Data Model</span></dt>
+                <dd>
+                    <div *ngIf="dataModelMapping.dataModel">
+                        <a [routerLink]="['/data-model', dataModelMapping.dataModel?.id, 'view']">{{dataModelMapping.dataModel?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/data-model-mapping', dataModelMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

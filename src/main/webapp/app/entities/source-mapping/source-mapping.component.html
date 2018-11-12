@@ -1,0 +1,90 @@
+<div>
+    <h2 id="page-heading">
+        <span>Source Mappings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-source-mapping" [routerLink]="['/source-mapping/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Source Mapping
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="sourceMappings">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fieldName"><span>Field Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fieldOrderNumber"><span>Field Order Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fieldDataType"><span>Field Data Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fieldScale"><span>Field Scale</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fieldPrecision"><span>Field Precision</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dbFieldName"><span>Db Field Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dbFieldDataType"><span>Db Field Data Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dbFieldScale"><span>Db Field Scale</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dbFieldPrecision"><span>Db Field Precision</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cde"><span>Cde</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pii"><span>Pii</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataCategory"><span>Data Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataQualityRule"><span>Data Quality Rule</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="feed.id"><span>Feed</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dataModelMapping.id"><span>Data Model Mapping</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let sourceMapping of sourceMappings ;trackBy: trackId">
+                <td><a [routerLink]="['/source-mapping', sourceMapping.id, 'view' ]">{{sourceMapping.id}}</a></td>
+                <td>{{sourceMapping.fieldName}}</td>
+                <td>{{sourceMapping.fieldOrderNumber}}</td>
+                <td>{{sourceMapping.fieldDataType}}</td>
+                <td>{{sourceMapping.fieldScale}}</td>
+                <td>{{sourceMapping.fieldPrecision}}</td>
+                <td>{{sourceMapping.dbFieldName}}</td>
+                <td>{{sourceMapping.dbFieldDataType}}</td>
+                <td>{{sourceMapping.dbFieldScale}}</td>
+                <td>{{sourceMapping.dbFieldPrecision}}</td>
+                <td>{{sourceMapping.cde}}</td>
+                <td>{{sourceMapping.pii}}</td>
+                <td>{{sourceMapping.dataCategory}}</td>
+                <td>{{sourceMapping.dataQualityRule}}</td>
+                <td>
+                    <div *ngIf="sourceMapping.feed">
+                        <a [routerLink]="['../feed', sourceMapping.feed?.id, 'view' ]" >{{sourceMapping.feed?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="sourceMapping.dataModelMapping">
+                        <a [routerLink]="['../data-model-mapping', sourceMapping.dataModelMapping?.id, 'view' ]" >{{sourceMapping.dataModelMapping?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/source-mapping', sourceMapping.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/source-mapping', sourceMapping.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'source-mapping/'+ sourceMapping.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

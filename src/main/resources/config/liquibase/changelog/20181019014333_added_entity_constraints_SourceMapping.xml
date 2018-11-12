@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity SourceMapping.
+    -->
+    <changeSet id="20181019014333-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="feed_id"
+                                 baseTableName="source_mapping"
+                                 constraintName="fk_source_mapping_feed_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="feed"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_model_mapping_id"
+                                 baseTableName="source_mapping"
+                                 constraintName="fk_source_mapping_data_model_mapping_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_model_mapping"/>
+
+        <addForeignKeyConstraint baseColumnNames="source_mappings_id"
+                                 baseTableName="source_mapping_data_asset"
+                                 constraintName="fk_source_mapping_data_asset_source_mappings_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="source_mapping"/>
+        <addForeignKeyConstraint baseColumnNames="data_assets_id"
+                                 baseTableName="source_mapping_data_asset"
+                                 constraintName="fk_source_mapping_data_asset_data_assets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_asset"/>
+        
+    </changeSet>
+</databaseChangeLog>

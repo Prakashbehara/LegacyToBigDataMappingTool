@@ -1,0 +1,102 @@
+{
+    "name": "SourceFeedMapping",
+    "fields": [
+        {
+            "fieldName": "fieldName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fieldOrderNumber",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fieldDataType",
+            "fieldType": "FieldDataType",
+            "fieldValues": "STRING,NUMBER,DECIMAL,DATE,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fieldScale",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "fieldPrecision",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cde",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pii",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataCategory",
+            "fieldType": "DataCategory",
+            "fieldValues": "UDG,EDG,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataQualityRule",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "sourceFeed",
+            "otherEntityName": "sourceFeed",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "dataModelMapping",
+            "otherEntityName": "dataModelMapping",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sourceFeedMapping"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "sourceDatabaseMapping",
+            "otherEntityName": "sourceDatabaseMapping",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sourceFeedMapping"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "dataAsset",
+            "otherEntityName": "dataAsset",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20181108031809",
+    "entityTableName": "source_feed_mapping",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

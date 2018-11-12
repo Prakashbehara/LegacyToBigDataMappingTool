@@ -1,0 +1,118 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-source-feed-heading">Create or edit a Source Feed</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!sourceFeed.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="sourceFeed.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_feedCode">Feed Code</label>
+                    <input type="text" class="form-control" name="feedCode" id="field_feedCode"
+                        [(ngModel)]="sourceFeed.feedCode" required/>
+                    <div [hidden]="!(editForm.controls.feedCode?.dirty && editForm.controls.feedCode?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.feedCode?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileNamePattern">File Name Pattern</label>
+                    <input type="text" class="form-control" name="fileNamePattern" id="field_fileNamePattern"
+                        [(ngModel)]="sourceFeed.fileNamePattern" required/>
+                    <div [hidden]="!(editForm.controls.fileNamePattern?.dirty && editForm.controls.fileNamePattern?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fileNamePattern?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_headerCount">Header Count</label>
+                    <input type="number" class="form-control" name="headerCount" id="field_headerCount"
+                        [(ngModel)]="sourceFeed.headerCount" required/>
+                    <div [hidden]="!(editForm.controls.headerCount?.dirty && editForm.controls.headerCount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headerCount?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.headerCount?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_trailerCount">Trailer Count</label>
+                    <input type="number" class="form-control" name="trailerCount" id="field_trailerCount"
+                        [(ngModel)]="sourceFeed.trailerCount" required/>
+                    <div [hidden]="!(editForm.controls.trailerCount?.dirty && editForm.controls.trailerCount?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.trailerCount?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.trailerCount?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_trailerRecordStartsWith">Trailer Record Starts With</label>
+                    <input type="text" class="form-control" name="trailerRecordStartsWith" id="field_trailerRecordStartsWith"
+                        [(ngModel)]="sourceFeed.trailerRecordStartsWith" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_feedFrequency">Feed Frequency</label>
+                    <select class="form-control" name="feedFrequency" [(ngModel)]="sourceFeed.feedFrequency" id="field_feedFrequency"  required>
+                        <option value="DAILY">DAILY</option>
+                        <option value="WEEKLY">WEEKLY</option>
+                        <option value="MONTHEND">MONTHEND</option>
+                        <option value="BIWEEKLY">BIWEEKLY</option>
+                        <option value="ADHOC">ADHOC</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.feedFrequency?.dirty && editForm.controls.feedFrequency?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.feedFrequency?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sla">SLA</label>
+                    <input type="text" class="form-control" name="sla" id="field_sla"
+                           [(ngModel)]="sourceFeed.sla" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_application">Application</label>
+                    <select class="form-control" id="field_application" name="application" [(ngModel)]="sourceFeed.application" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="applicationOption.id === sourceFeed.application?.id ? sourceFeed.application : applicationOption" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.applicationCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sourceDatabase">Source Database</label>
+                    <select class="form-control" id="field_sourceDatabase" name="sourceDatabase" [(ngModel)]="sourceFeed.sourceDatabase">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="sourceDatabaseOption.id === sourceFeed.sourceDatabase?.id ? sourceFeed.sourceDatabase : sourceDatabaseOption" *ngFor="let sourceDatabaseOption of sourcedatabases; trackBy: trackSourceDatabaseById">{{sourceDatabaseOption.tableName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

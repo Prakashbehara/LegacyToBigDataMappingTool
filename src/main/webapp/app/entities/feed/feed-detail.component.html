@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="feed">
+            <h2><span>Feed</span> {{feed.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Feed Code</span></dt>
+                <dd>
+                    <span>{{feed.feedCode}}</span>
+                </dd>
+                <dt><span>File Name Pattern</span></dt>
+                <dd>
+                    <span>{{feed.fileNamePattern}}</span>
+                </dd>
+                <dt><span>Header Count</span></dt>
+                <dd>
+                    <span>{{feed.headerCount}}</span>
+                </dd>
+                <dt><span>Trailer Count</span></dt>
+                <dd>
+                    <span>{{feed.trailerCount}}</span>
+                </dd>
+                <dt><span>Trailer Record Starts With</span></dt>
+                <dd>
+                    <span>{{feed.trailerRecordStartsWith}}</span>
+                </dd>
+                <dt><span>Feed Frequency</span></dt>
+                <dd>
+                    <span>{{feed.feedFrequency}}</span>
+                </dd>
+                <dt><span>Source Database Table Name</span></dt>
+                <dd>
+                    <span>{{feed.sourceDatabaseTableName}}</span>
+                </dd>
+                <dt><span>Application</span></dt>
+                <dd>
+                    <div *ngIf="feed.application">
+                        <a [routerLink]="['/application', feed.application?.id, 'view']">{{feed.application?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/feed', feed.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

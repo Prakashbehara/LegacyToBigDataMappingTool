@@ -1,0 +1,31 @@
+{
+    "name": "DataModel",
+    "fields": [
+        {
+            "fieldName": "entitiyName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "domain",
+            "fieldType": "Domain",
+            "fieldValues": "POLICY,FINANCE,INGENIUM,INVESTMENT,DO_NOT_KNOW"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "dataModelMapping",
+            "otherEntityName": "dataModelMapping",
+            "otherEntityRelationshipName": "dataModel"
+        }
+    ],
+    "changelogDate": "20181107215940",
+    "entityTableName": "data_model",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

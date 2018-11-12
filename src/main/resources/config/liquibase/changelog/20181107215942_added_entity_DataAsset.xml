@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity DataAsset.
+    -->
+    <changeSet id="20181107215942-1" author="jhipster">
+        <createTable tableName="data_asset">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="asset_file_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jhi_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="frequency" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="stored_procedure_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="query_logic" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="remarks" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edh_asset_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email_distribution" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="application_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+        <createTable tableName="data_asset_source_feed">
+            <column name="source_feeds_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_assets_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="data_assets_id, source_feeds_id" tableName="data_asset_source_feed"/>
+        
+        <createTable tableName="data_asset_source_database">
+            <column name="source_databases_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_assets_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="data_assets_id, source_databases_id" tableName="data_asset_source_database"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -1,0 +1,45 @@
+{
+    "name": "SourceDatabaseMapping",
+    "fields": [
+        {
+            "fieldName": "dbColumnName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dbDataType",
+            "fieldType": "FieldDataType",
+            "fieldValues": "STRING,NUMBER,DECIMAL,DATE,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dbFieldScale",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dbFieldPrecision",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "sourceDatabase",
+            "otherEntityName": "sourceDatabase",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181108031810",
+    "entityTableName": "source_database_mapping",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

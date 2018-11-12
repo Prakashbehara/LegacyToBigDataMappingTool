@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-source-database-mapping-heading">Create or edit a Source Database Mapping</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!sourceDatabaseMapping.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="sourceDatabaseMapping.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dbColumnName">Db Column Name</label>
+                    <input type="text" class="form-control" name="dbColumnName" id="field_dbColumnName"
+                        [(ngModel)]="sourceDatabaseMapping.dbColumnName" required/>
+                    <div [hidden]="!(editForm.controls.dbColumnName?.dirty && editForm.controls.dbColumnName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dbColumnName?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dbDataType">Db Data Type</label>
+                    <select class="form-control" name="dbDataType" [(ngModel)]="sourceDatabaseMapping.dbDataType" id="field_dbDataType"  required>
+                        <option value="STRING">STRING</option>
+                        <option value="NUMBER">NUMBER</option>
+                        <option value="DECIMAL">DECIMAL</option>
+                        <option value="DATE">DATE</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.dbDataType?.dirty && editForm.controls.dbDataType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dbDataType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dbFieldScale">Db Field Scale</label>
+                    <input type="number" class="form-control" name="dbFieldScale" id="field_dbFieldScale"
+                        [(ngModel)]="sourceDatabaseMapping.dbFieldScale" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dbFieldPrecision">Db Field Precision</label>
+                    <input type="number" class="form-control" name="dbFieldPrecision" id="field_dbFieldPrecision"
+                        [(ngModel)]="sourceDatabaseMapping.dbFieldPrecision" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sourceDatabase">Source Database</label>
+                    <select class="form-control" id="field_sourceDatabase" name="sourceDatabase" [(ngModel)]="sourceDatabaseMapping.sourceDatabase" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="sourceDatabaseOption.id === sourceDatabaseMapping.sourceDatabase?.id ? sourceDatabaseMapping.sourceDatabase : sourceDatabaseOption" *ngFor="let sourceDatabaseOption of sourcedatabases; trackBy: trackSourceDatabaseById">{{sourceDatabaseOption.tableName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sourceMapping">
+            <h2><span>Source Mapping</span> {{sourceMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Field Name</span></dt>
+                <dd>
+                    <span>{{sourceMapping.fieldName}}</span>
+                </dd>
+                <dt><span>Field Order Number</span></dt>
+                <dd>
+                    <span>{{sourceMapping.fieldOrderNumber}}</span>
+                </dd>
+                <dt><span>Field Data Type</span></dt>
+                <dd>
+                    <span>{{sourceMapping.fieldDataType}}</span>
+                </dd>
+                <dt><span>Field Scale</span></dt>
+                <dd>
+                    <span>{{sourceMapping.fieldScale}}</span>
+                </dd>
+                <dt><span>Field Precision</span></dt>
+                <dd>
+                    <span>{{sourceMapping.fieldPrecision}}</span>
+                </dd>
+                <dt><span>Db Field Name</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dbFieldName}}</span>
+                </dd>
+                <dt><span>Db Field Data Type</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dbFieldDataType}}</span>
+                </dd>
+                <dt><span>Db Field Scale</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dbFieldScale}}</span>
+                </dd>
+                <dt><span>Db Field Precision</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dbFieldPrecision}}</span>
+                </dd>
+                <dt><span>Cde</span></dt>
+                <dd>
+                    <span>{{sourceMapping.cde}}</span>
+                </dd>
+                <dt><span>Pii</span></dt>
+                <dd>
+                    <span>{{sourceMapping.pii}}</span>
+                </dd>
+                <dt><span>Data Category</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dataCategory}}</span>
+                </dd>
+                <dt><span>Data Quality Rule</span></dt>
+                <dd>
+                    <span>{{sourceMapping.dataQualityRule}}</span>
+                </dd>
+                <dt><span>Feed</span></dt>
+                <dd>
+                    <div *ngIf="sourceMapping.feed">
+                        <a [routerLink]="['/feed', sourceMapping.feed?.id, 'view']">{{sourceMapping.feed?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Data Model Mapping</span></dt>
+                <dd>
+                    <div *ngIf="sourceMapping.dataModelMapping">
+                        <a [routerLink]="['/data-model-mapping', sourceMapping.dataModelMapping?.id, 'view']">{{sourceMapping.dataModelMapping?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Data Asset</span></dt>
+                <dd>
+                    <span *ngFor="let dataAsset of sourceMapping.dataAssets; let last = last">
+                        <a [routerLink]="['/data-asset', dataAsset?.id, 'view' ]">{{dataAsset.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/source-mapping', sourceMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

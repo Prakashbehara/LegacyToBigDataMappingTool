@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span>Source Databases</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-source-database" [routerLink]="['/source-database/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Source Database
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="sourceDatabases">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <!--<th><span>ID</span></th>-->
+                <th><span>Application</span></th>
+            <th><span>Table Name</span></th>
+            <th><span>Schema</span></th>
+            <th><span>Table Type</span></th>
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let sourceDatabase of sourceDatabases ;trackBy: trackId">
+               <!-- <td><a [routerLink]="['/source-database', sourceDatabase.id, 'view' ]">{{sourceDatabase.id}}</a></td>-->
+                <td>
+                    <div *ngIf="sourceDatabase.application">
+                        <a [routerLink]="['../application', sourceDatabase.application?.id, 'view' ]" >{{sourceDatabase.application?.applicationCode}}</a>
+                    </div>
+                </td>
+                <td>{{sourceDatabase.tableName}}</td>
+                <td>{{sourceDatabase.schema}}</td>
+                <td>{{sourceDatabase.tableType}}</td>
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/source-database', sourceDatabase.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/source-database', sourceDatabase.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'source-database/'+ sourceDatabase.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

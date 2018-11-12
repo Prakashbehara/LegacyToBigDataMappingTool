@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span>Data Model Mappings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-data-model-mapping" [routerLink]="['/data-model-mapping/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Data Model Mapping
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="dataModelMappings">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <!--<th><span>ID</span></th> -->
+                <th><span>Data Model</span></th>
+            <th><span>Field Name</span></th>
+            <th><span>Field Data Type</span></th>
+            <th><span>Field Order Number</span></th>
+            <th><span>Field Scale</span></th>
+            <th><span>Field Precision</span></th>
+            <th><span>Pii</span></th>
+            <th><span>Data Category</span></th>
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dataModelMapping of dataModelMappings ;trackBy: trackId">
+               <!-- <td><a [routerLink]="['/data-model-mapping', dataModelMapping.id, 'view' ]">{{dataModelMapping.id}}</a></td> -->
+                <td>
+                    <div *ngIf="dataModelMapping.dataModel">
+                        <a [routerLink]="['../data-model', dataModelMapping.dataModel?.id, 'view' ]" >{{dataModelMapping.dataModel?.entitiyName}}</a>
+                    </div>
+                </td>
+                <td>{{dataModelMapping.fieldName}}</td>
+                <td>{{dataModelMapping.fieldDataType}}</td>
+                <td>{{dataModelMapping.fieldOrderNumber}}</td>
+                <td>{{dataModelMapping.fieldScale}}</td>
+                <td>{{dataModelMapping.fieldPrecision}}</td>
+                <td>{{dataModelMapping.pii}}</td>
+                <td>{{dataModelMapping.dataCategory}}</td>
+
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/data-model-mapping', dataModelMapping.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/data-model-mapping', dataModelMapping.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'data-model-mapping/'+ dataModelMapping.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

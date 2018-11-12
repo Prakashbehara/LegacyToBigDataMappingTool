@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DataAsset.
+    -->
+    <changeSet id="20181107215942-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="application_id"
+                                 baseTableName="data_asset"
+                                 constraintName="fk_data_asset_application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="application"/>
+
+        <addForeignKeyConstraint baseColumnNames="data_assets_id"
+                                 baseTableName="data_asset_source_feed"
+                                 constraintName="fk_data_asset_source_feed_data_assets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_asset"/>
+        <addForeignKeyConstraint baseColumnNames="source_feeds_id"
+                                 baseTableName="data_asset_source_feed"
+                                 constraintName="fk_data_asset_source_feed_source_feeds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="source_feed"/>
+        
+        <addForeignKeyConstraint baseColumnNames="data_assets_id"
+                                 baseTableName="data_asset_source_database"
+                                 constraintName="fk_data_asset_source_database_data_assets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="data_asset"/>
+        <addForeignKeyConstraint baseColumnNames="source_databases_id"
+                                 baseTableName="data_asset_source_database"
+                                 constraintName="fk_data_asset_source_database_source_databases_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="source_database"/>
+        
+    </changeSet>
+</databaseChangeLog>

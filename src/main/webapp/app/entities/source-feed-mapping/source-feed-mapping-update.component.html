@@ -1,0 +1,147 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-source-feed-mapping-heading">Create or edit a Source Feed Mapping</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!sourceFeedMapping.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="sourceFeedMapping.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sourceFeed">Source Feed</label>
+                    <select class="form-control" id="field_sourceFeed" name="sourceFeed" [(ngModel)]="sourceFeedMapping.sourceFeed" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="sourceFeedOption.id === sourceFeedMapping.sourceFeed?.id ? sourceFeedMapping.sourceFeed : sourceFeedOption" *ngFor="let sourceFeedOption of sourcefeeds; trackBy: trackSourceFeedById">{{sourceFeedOption.feedCode}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldName">Field Name</label>
+                    <input type="text" class="form-control" name="fieldName" id="field_fieldName"
+                           [(ngModel)]="sourceFeedMapping.fieldName" required/>
+                    <div [hidden]="!(editForm.controls.fieldName?.dirty && editForm.controls.fieldName?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fieldName?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldOrderNumber">Field Order Number</label>
+                    <input type="number" class="form-control" name="fieldOrderNumber" id="field_fieldOrderNumber"
+                           [(ngModel)]="sourceFeedMapping.fieldOrderNumber" required/>
+                    <div [hidden]="!(editForm.controls.fieldOrderNumber?.dirty && editForm.controls.fieldOrderNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fieldOrderNumber?.errors?.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fieldOrderNumber?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldDataType">Field Data Type</label>
+                    <select class="form-control" name="fieldDataType" [(ngModel)]="sourceFeedMapping.fieldDataType" id="field_fieldDataType"  required>
+                        <option value="STRING">STRING</option>
+                        <option value="NUMBER">NUMBER</option>
+                        <option value="DECIMAL">DECIMAL</option>
+                        <option value="DATE">DATE</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.fieldDataType?.dirty && editForm.controls.fieldDataType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fieldDataType?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldScale">Field Scale</label>
+                    <input type="number" class="form-control" name="fieldScale" id="field_fieldScale"
+                           [(ngModel)]="sourceFeedMapping.fieldScale" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fieldPrecision">Field Precision</label>
+                    <input type="number" class="form-control" name="fieldPrecision" id="field_fieldPrecision"
+                           [(ngModel)]="sourceFeedMapping.fieldPrecision" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cde">Cde</label>
+                    <input type="checkbox" class="form-control" name="cde" id="field_cde"
+                           [(ngModel)]="sourceFeedMapping.cde" />
+                    <div [hidden]="!(editForm.controls.cde?.dirty && editForm.controls.cde?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.cde?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pii">Pii</label>
+                    <input type="checkbox" class="form-control" name="pii" id="field_pii"
+                           [(ngModel)]="sourceFeedMapping.pii" />
+                    <div [hidden]="!(editForm.controls.pii?.dirty && editForm.controls.pii?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.pii?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataCategory">Data Category</label>
+                    <select class="form-control" name="dataCategory" [(ngModel)]="sourceFeedMapping.dataCategory" id="field_dataCategory"  required>
+                        <option value="UDG">UDG</option>
+                        <option value="EDG">EDG</option>
+                        <option value="DO_NOT_KNOW">DO_NOT_KNOW</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.dataCategory?.dirty && editForm.controls.dataCategory?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.dataCategory?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataQualityRule">Data Quality Rule</label>
+                    <input type="text" class="form-control" name="dataQualityRule" id="field_dataQualityRule"
+                           [(ngModel)]="sourceFeedMapping.dataQualityRule" />
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_sourceDatabaseMapping">Source Database Mapping</label>
+                    <select class="form-control" id="field_sourceDatabaseMapping" name="sourceDatabaseMapping" [(ngModel)]="sourceFeedMapping.sourceDatabaseMapping">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="sourceDatabaseMappingOption.id === sourceFeedMapping.sourceDatabaseMapping?.id ? sourceFeedMapping.sourceDatabaseMapping : sourceDatabaseMappingOption" *ngFor="let sourceDatabaseMappingOption of sourcedatabasemappings; trackBy: trackSourceDatabaseMappingById">{{ sourceDatabaseMappingOption?.sourceDatabase?.tableName}}.{{ sourceDatabaseMappingOption.dbColumnName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dataModelMapping">Data Model Mapping</label>
+                    <select class="form-control" id="field_dataModelMapping" name="dataModelMapping" [(ngModel)]="sourceFeedMapping.dataModelMapping">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dataModelMappingOption.id === sourceFeedMapping.dataModelMapping?.id ? sourceFeedMapping.dataModelMapping : dataModelMappingOption" *ngFor="let dataModelMappingOption of datamodelmappings; trackBy: trackDataModelMappingById">{{dataModelMappingOption?.dataModel?.entitiyName}}.{{dataModelMappingOption.fieldName}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="field_dataAsset">Data Asset</label>
+                    <select class="form-control" id="field_dataAsset" multiple name="dataAsset" [(ngModel)]="sourceFeedMapping.dataAssets">
+                        <option [ngValue]="getSelected(sourceFeedMapping.dataAssets, dataAssetOption)" *ngFor="let dataAssetOption of dataassets; trackBy: trackDataAssetById">{{dataAssetOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

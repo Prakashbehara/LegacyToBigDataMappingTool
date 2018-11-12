@@ -1,0 +1,76 @@
+{
+    "name": "Application",
+    "fields": [
+        {
+            "fieldName": "applicationCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 3,
+            "fieldValidateRulesMaxlength": 6
+        },
+        {
+            "fieldName": "domain",
+            "fieldType": "Domain",
+            "fieldValues": "POLICY,FINANCE,INGENIUM,INVESTMENT,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "projectType",
+            "fieldType": "ProjectType",
+            "fieldValues": "CONVERSION,NEW,DO_NOT_KNOW",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength",
+                "pattern"
+            ],
+            "fieldValidateRulesMaxlength": 50,
+            "fieldValidateRulesPattern": "[a-z]+"
+        },
+        {
+            "fieldName": "owner",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sourceFeed",
+            "otherEntityName": "sourceFeed",
+            "otherEntityRelationshipName": "application"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "dataAsset",
+            "otherEntityName": "dataAsset",
+            "otherEntityRelationshipName": "application"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sourceDatabase",
+            "otherEntityName": "sourceDatabase",
+            "otherEntityRelationshipName": "application"
+        }
+    ],
+    "changelogDate": "20181019014331",
+    "entityTableName": "application",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

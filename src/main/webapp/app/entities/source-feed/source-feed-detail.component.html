@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sourceFeed">
+            <h2><span>Source Feed</span> {{sourceFeed.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Feed Code</span></dt>
+                <dd>
+                    <span>{{sourceFeed.feedCode}}</span>
+                </dd>
+                <dt><span>File Name Pattern</span></dt>
+                <dd>
+                    <span>{{sourceFeed.fileNamePattern}}</span>
+                </dd>
+                <dt><span>Header Count</span></dt>
+                <dd>
+                    <span>{{sourceFeed.headerCount}}</span>
+                </dd>
+                <dt><span>Trailer Count</span></dt>
+                <dd>
+                    <span>{{sourceFeed.trailerCount}}</span>
+                </dd>
+                <dt><span>Trailer Record Starts With</span></dt>
+                <dd>
+                    <span>{{sourceFeed.trailerRecordStartsWith}}</span>
+                </dd>
+                <dt><span>Feed Frequency</span></dt>
+                <dd>
+                    <span>{{sourceFeed.feedFrequency}}</span>
+                </dd>
+                <dt><span>SLA</span></dt>
+                <dd>
+                    <span>{{sourceFeed.sla}}</span>
+                </dd>
+                <dt><span>Application</span></dt>
+                <dd>
+                    <div *ngIf="sourceFeed.application">
+                        <a [routerLink]="['/application', sourceFeed.application?.id, 'view']">{{sourceFeed.application?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Source Database</span></dt>
+                <dd>
+                    <div *ngIf="sourceFeed.sourceDatabase">
+                        <a [routerLink]="['/source-database', sourceFeed.sourceDatabase?.id, 'view']">{{sourceFeed.sourceDatabase?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/source-feed', sourceFeed.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
