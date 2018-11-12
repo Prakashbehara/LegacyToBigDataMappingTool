@@ -180,3 +180,10 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+## commands
+jhipster import-jdl mappingTool-jdl.jh
+npm start
+mvnw
+mvnw -Pprod
+java -jar spring-cloud-eureka-registry-1-0.0.1-SNAPSHOT.jar
