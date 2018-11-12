@@ -187,3 +187,4 @@ npm start
 mvnw
 mvnw -Pprod
 java -jar spring-cloud-eureka-registry-1-0.0.1-SNAPSHOT.jar
+https://start.jhipster.tech/jdl-studio/
